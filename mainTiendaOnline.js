@@ -1,116 +1,221 @@
 const tienda = (proveedor, producto) => {
-    return {
-        proveedores: {},
-        productos: {}
-    }
+  return {
+    proveedores: {},
+    productos: {}
+  }
 };
 
 const nuevoProveedor = () => {
-    const prov = {
-        nombre: prompt("Indica el nombre: "),
-        cif: prompt("Indica el CIF: "),
-        direccion: prompt("Indica el dirección: "),
-        telefono: prompt("Indica el télefono: ")
-    };
-    tienda.proveedores[prov.cif] = prov;
-}
+  const prov = {
+    nombre: prompt("Indica el nombre: "),
+    cif: prompt("Indica el CIF: "),
+    direccion: prompt("Indica el dirección: "),
+    telefono: prompt("Indica el télefono: ")
+  };
+  tienda.proveedores[prov.cif] = prov;
+};
+
+const nuevoProducto = () => {
+  let cont = 0;
+  const prod = {
+    id: cont++,
+    nombre: prompt("Indica el nombre: "),
+    precio: +prompt("Indica el precio: "),
+    cantidad: +prompt("Indica la cantidad: "),
+  };
+  tienda.productos[prod.id] = prod;
+};
 
 const editarProveedor = cif => {
 
-    for (const proveedor in tienda.proveedores) {
+  for (const proveedor in tienda.proveedores) {
 
-        if (cif === proveedor) {
+    if (cif === proveedor) {
 
-            if (confirm("¿Quieres editar el nombre del proveedor? Aceptar = sí / Cancelar = no")) {
-                tienda.proveedores[proveedor].nombre = prompt('Indica el nuevo nombre: ');
-            }
+      if (confirm("¿Quieres editar el nombre del proveedor? Aceptar = sí / Cancelar = no")) {
+        tienda.proveedores[proveedor].nombre = prompt('Indica el nuevo nombre: ');
+      }
 
-            if (confirm("¿Quieres editar el CIF del proveedor? Aceptar = sí / Cancelar = no")) {
-                
-                let cif = +prompt('Indica el nuevo CIF: ');
-                
-                for (const proveedor in tienda.proveedores) {
-                    
-                    if (cif === proveedor) {
-                        alert("Error ese CIF ya existe");
-                    } else {
-                        tienda.proveedores[proveedor].cif = +prompt('Indica el nuevo CIF: ');
-                    }
-                };
+      if (confirm("¿Quieres editar el CIF del proveedor? Aceptar = sí / Cancelar = no")) {
 
-            }
+        let cif = +prompt('Indica el nuevo CIF: ');
 
-            if (confirm("¿Quieres editar la dirección del proveedor? Aceptar = sí / Cancelar = no")) {
-                tienda.proveedores[proveedor].direccion = prompt('Indica la nueva dirección: ');
-            }
+        for (const proveedor in tienda.proveedores) {
 
-            if (confirm("¿Quieres editar el télefono del proveedor? Aceptar = sí / Cancelar = no")) {
-                tienda.proveedores[proveedor].telefono = +prompt('Indica el nuevo télefono: ');
-            }
+          if (cif === proveedor) {
+            alert("Error ese CIF ya existe");
+          } else {
+            tienda.proveedores[proveedor].cif = +prompt('Indica el nuevo CIF: ');
+          }
+        };
 
-        }
-        return;
+      }
+
+      if (confirm("¿Quieres editar la dirección del proveedor? Aceptar = sí / Cancelar = no")) {
+        tienda.proveedores[proveedor].direccion = prompt('Indica la nueva dirección: ');
+      }
+
+      if (confirm("¿Quieres editar el télefono del proveedor? Aceptar = sí / Cancelar = no")) {
+        tienda.proveedores[proveedor].telefono = +prompt('Indica el nuevo télefono: ');
+      }
+
+      console.log(`Proveedor actualizado: ${tienda.proveedores.proveedor}`);
+    } else {
+      alert("Ese CIF no existe");
+      return;
     }
+  }
+};
 
+const editarProducto = id => {
 
-    console.log(`Proveedor actualizado: ${tienda.proveedor}`);
+  for (const producto in tienda.productos) {
+
+    if (id === producto) {
+
+      if (confirm("¿Quieres editar el nombre del producto? Aceptar = sí / Cancelar = no")) {
+        tienda.productos[producto].nombre = prompt('Indica el nuevo nombre: ');
+      }
+
+      if (confirm("¿Quieres editar el precio del producto? Aceptar = sí / Cancelar = no")) {
+        tienda.productos[producto].precio = +prompt('Indica el nuevo precio: ');
+      }
+
+      if (confirm("¿Quieres editar ela cantidad del producto? Aceptar = sí / Cancelar = no")) {
+        tienda.productos[producto].cantidad = +prompt('Indica la nueva cantidad del producto: ');
+      }
+
+      console.log(`Producto actualizado: ${tienda.productos.producto}`);
+    } else {
+      alert("Ese ID no existe");
+      return;
+    }
+  }
 
 };
 
-const editarProducto = tienda => {
+const eliminarProducto = id => {
 
-    if (confirm("¿Quieres editar el nombre? Aceptar = sí / Cancelar = no")) {
-        tienda.producto.nombre = prompt("Nombre: ");;
+  for (const producto in tienda.productos) {
+    if (id === producto) {
+      delete tienda.producto;
+    } else {
+      alert("Ese ID no existe");
+      return;
     }
-
-    if (confirm("¿Quieres editar el precio? Aceptar = sí / Cancelar = no")) {
-        tienda.producto.precio = +prompt("Precio: ");;
-    }
-
-    if (confirm("¿Quieres editar la cantidad? Aceptar = sí / Cancelar = no")) {
-        tienda.producto.cantidad = +prompt("Cantidad: ");;
-    }
-
-    if (confirm("¿Quieres editar el proveedor? Aceptar = sí / Cancelar = no")) {
-        editarProveedor(tienda.producto);
-    }
-
-    console.log(`Producto actualizado: ${prod}`);
+  }
 
 };
 
-const eliminarProducto = tienda => {
-    delete tienda.producto;
-}
+const valorTotalProductosEnStock = id => {
 
-const valorTotalProductosEnStock = (prod) => {
-
-    if (prod.cantidad > 0) {
-        let valorTotal = prod.cantidad * prod.precio;
+  for (const producto in tienda.productos) {
+    if (id === producto) {
+      if (tienda.productos.producto.cantidad > 0) {
+        let valorTotal = tienda.productos.producto.cantidad * tienda.productos.producto.precio;
         console.log(`El valor total es ${valorTotal}`);
-    } else {
+      } else {
         console.log(`No hay stock`);
+      }
+    } else {
+      alert("Ese ID no existe");
+      return;
     }
+  }
 
 };
 
-const copiarProducto = (prod) => {
+const copiarProducto = id => {
 
-    let nombre = prod.nombre;
-    let precio = prod.precio;
-    let cantidad = prod.cantidad;
+  for (const producto in tienda.productos) {
 
-    if (confirm(`¿Quieres cambiar el proveedor de la copia? Aceptar = sí / Cancelar = no`)) {
-        prod.proveedor.nombre = prompt("Nombre Proveedor: ");
-        prod.CIF = +prompt("CIF Proveedor: ");
-        prod.direccion = prompt("Direeción Proveedor: ");
-        prod.telefono = +prompt("Télefono Proveedor:");
+    if (id === producto) {
+
+      let nombre = tienda.productos.producto.nombre;
+      let precio = tienda.productos.producto.precio;
+      let cantidad = tienda.productos.producto.cantidad;
+
+      for (const proveedor in tienda.proveedores) {
+
+        if (confirm(`¿Quieres cambiar el proveedor de la copia? Aceptar = sí / Cancelar = no`)) {
+
+          let cif = tienda.productos.producto.proveedor.CIF;
+          if (cif === proveedor) {
+            editarProveedor(cif);
+          }
+
+        } else {
+          let nombreProveedor = tienda.proveedores.proveedor.nombre;
+          let cifProveedor = tienda.proveedores.proveedor.CIF;
+          let direccionProveedor = tienda.proveedores.proveedor.direccion;
+          let telefonoProveedor = tienda.proveedores.proveedor.telefono;
+        }
+
+      }
     } else {
-        let nombreProveedor = prod.proveedor.nombre;
-        let cifProveedor = prod.proveedor.CIF;
-        let direccionProveedor = prod.proveedor.direccion;
-        let telefonoProveedor = prod.proveedor.telefono;
+      alert("Ese ID no existe");
+      return;
+    }
+  }
+};
+
+const menuOpciones = () => {
+
+  let salir = false;
+  let opcion;
+
+  while(!salir) {
+
+    opcion = +prompt(
+      "Menú de opciones:\n" +
+      "1. Crear nuevo proveedor\n" +
+      "2. Crear nuevo producto\n" +
+      "3. Editar proveedor\n" +
+      "4. Editar producto\n" +
+      "5. Eliminar producto\n" +
+      "6. Calcular el valor del stock de un producto\n" +
+      "7. Copiar producto\n" +
+      "8. Salir\n" +
+      "Elige una opción (1-8):");
+
+    switch (opcion) {
+
+      case 1:
+        console.log("Elegiste la Opción 1");
+        nuevoProveedor();
+        break;
+      case 2:
+        console.log("Elegiste la Opción 2");
+        nuevoProducto();
+        break;
+      case 3:
+        console.log("Elegiste la Opción 3");
+        editarProveedor(+prompt("Dime el CIF del proveedor: "));
+        break;
+      case 4:
+        console.log("Elegiste la Opción 4");
+        editarProducto(+prompt("Dime el ID del producto: "));
+        break;
+      case 5:
+        console.log("Elegiste la Opción 5");
+        eliminarProducto(+prompt("Dime el ID del producto: "));
+        break;
+      case 6:
+        console.log("Elegiste la Opción 6");
+        valorTotalProductosEnStock((+prompt("Dime el ID del producto: ")));
+        break;
+      case 7:
+        console.log("Elegiste la Opción 7");
+        copiarProducto(+prompt("Dime el ID del producto: "));
+        break;
+      case 8:
+        console.log("Saliendo del menú...");
+        salir = true;
+        break;
+      default:
+        console.log("Opción no válida, por favor elige entre 1 y 8");
     }
 
+  } 
 
 };
