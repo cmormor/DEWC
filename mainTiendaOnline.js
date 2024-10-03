@@ -6,7 +6,7 @@ const tienda = {
 const nuevoProveedor = () => {
     const prov = {
         nombre: prompt("Indica el nombre: "),
-        cif: prompt("Indica el CIF: "),
+        cif: +prompt("Indica el CIF: "),
         direccion: prompt("Indica la dirección: "),
         telefono: +prompt("Indica el télefono: ")
     };
@@ -16,12 +16,11 @@ const nuevoProveedor = () => {
 
 const nuevoProducto = () => {
 
-    let cont = 0;
     const cif = prompt("Indica el CIF del proveedor:");
     if (tienda.proveedores[cif]) {
         const prod = {
-            id: cont++,
             nombre: prompt("Indica el nombre del producto: "),
+            id: +prompt("Indica el ID: "),
             precio: +prompt("Indica el precio: "),
             cantidad: +prompt("Indica la cantidad: "),
             proveedor: cif
@@ -33,11 +32,27 @@ const nuevoProducto = () => {
     }
 };
 
+const mostrarProveedores = () => {
+
+    for (const cif in tienda.proveedores) {
+        const proveedor = tienda.proveedores[cif];
+        console.log(`Proveedor CIF: ${cif}, Nombre: ${proveedor.nombre}, Dirección: ${proveedor.direccion}, Teléfono: ${proveedor.telefono}`);
+    }
+};
+
+const mostrarProductos = () => {
+
+    for (const id in tienda.productos) {
+        const producto = tienda.productos[id];
+        console.log(`Producto ID: ${id}, Nombre: ${producto.nombre}, Precio: ${producto.precio}, Cantidad: ${producto.cantidad}, Proveedor: ${producto.proveedor} `);
+    }
+};
+
 const editarProveedor = cif => {
 
     for (const proveedor in tienda.proveedores) {
 
-        if (cif === proveedor) {
+        if (cif == proveedor) {
 
             if (confirm("¿Quieres editar el nombre del proveedor? Aceptar = sí / Cancelar = no")) {
                 tienda.proveedores[proveedor].nombre = prompt('Indica el nuevo nombre: ');
@@ -77,8 +92,8 @@ const editarProveedor = cif => {
 const editarProducto = id => {
 
     for (const producto in tienda.productos) {
-
-        if (id === producto) {
+        
+        if (id == producto) {
 
             if (confirm("¿Quieres editar el nombre del producto? Aceptar = sí / Cancelar = no")) {
                 tienda.productos[producto].nombre = prompt('Indica el nuevo nombre: ');
@@ -104,8 +119,9 @@ const editarProducto = id => {
 const eliminarProducto = id => {
 
     for (const producto in tienda.productos) {
-        if (id === producto) {
-            delete delete tienda.productos[id];
+        if (id == producto) {
+            delete tienda.productos[id];
+            console.log(`Producto con ID: ${id} ha sido eliminado`)
         } else {
             alert("Ese ID no existe");
             return;
@@ -114,26 +130,10 @@ const eliminarProducto = id => {
 
 };
 
-const mostrarProveedores = () => {
-
-    for (const cif in tienda.proveedores) {
-        const proveedor = tienda.proveedores[cif];
-        console.log(`Proveedor CIF: ${cif}, Nombre: ${proveedor.nombre}, Dirección: ${proveedor.direccion}, Teléfono: ${proveedor.telefono}`);
-    }
-};
-
-const mostrarProductos = () => {
-
-    for (const id in tienda.proveedores) {
-        const producto = tienda.proveedores[id];
-        console.log(`Producto ID: ${id}, Nombre: ${producto.nombre}, Precio: ${producto.precio}, Cantidad: ${producto.cantidad}, Proveedor: ${producto.proveedor} `);
-    }
-};
-
 const valorTotalProductosEnStock = id => {
 
     for (const producto in tienda.productos) {
-        if (id === producto) {
+        if (id == producto) {
             if (tienda.productos.producto.cantidad > 0) {
                 let valorTotal = tienda.productos[id].cantidad * tienda.productos[id].precio;
                 console.log(`El valor total es ${valorTotal}`);
@@ -152,7 +152,7 @@ const copiarProducto = id => {
 
     for (const producto in tienda.productos) {
 
-        if (id === producto) {
+        if (id == producto) {
 
             let nombre = tienda.productos.producto.nombre;
             let precio = tienda.productos.producto.precio;
@@ -191,11 +191,11 @@ const menuOpciones = () => {
             "Menú de opciones:\n" +
             "1. Crear nuevo proveedor\n" +
             "2. Crear nuevo producto\n" +
-            "3. Editar proveedor\n" +
-            "4. Editar producto\n" +
-            "5. Eliminar producto\n" +
-            "6. Mostrar proveedores\n" +
-            "7. Mostrar productos\n" +
+            "3. Mostrar proveedores\n" +
+            "4. Mostrar productos\n" +
+            "5. Editar proveedor\n" +
+            "6. Editar producto\n" +
+            "7. Eliminar producto\n" +
             "8. Calcular el valor del stock de un producto\n" +
             "9. Copiar producto\n" +
             "10. Salir\n" +
@@ -204,39 +204,39 @@ const menuOpciones = () => {
 
         switch (opcion) {
             case 1:
-                console.log("Elegiste la Opción 1");
+                console.log("Elegiste la Opción 1: Crear nuevo proveedor");
                 nuevoProveedor();
                 break;
             case 2:
-                console.log("Elegiste la Opción 2");
+                console.log("Elegiste la Opción 2: Crear nuevo producto");
                 nuevoProducto();
                 break;
             case 3:
-                console.log("Elegiste la Opción 3");
-                editarProveedor(+prompt("Dime el CIF del proveedor: "));
-                break;
-            case 4:
-                console.log("Elegiste la Opción 4");
-                editarProducto(+prompt("Dime el ID del producto: "));
-                break;
-            case 5:
-                console.log("Elegiste la Opción 5");
-                eliminarProducto(+prompt("Dime el ID del producto: "));
-                break;
-            case 6:
-                console.log("Elegiste la Opción 6");
+                console.log("Elegiste la Opción 3: Mostrar proveedores");
                 mostrarProveedores();
                 break;
-            case 7:
-                console.log("Elegiste la Opción 7");
+            case 4:
+                console.log("Elegiste la Opción 4: Mostrar productos");
                 mostrarProductos();
                 break;
+            case 5:
+                console.log("Elegiste la Opción 5: Editar proveedor");
+                editarProveedor(+prompt("Dime el CIF del proveedor: "));
+                break;
+            case 6:
+                console.log("Elegiste la Opción 6: Editar producto");
+                editarProducto(+prompt("Dime el ID del producto: "));
+                break;
+            case 7:
+                console.log("Elegiste la Opción 7: Eliminar producto");
+                eliminarProducto(+prompt("Dime el ID del producto: "));
+                break;
             case 8:
-                console.log("Elegiste la Opción 8");
+                console.log("Elegiste la Opción 8: Calcular el valor del stock de un producto");
                 valorTotalProductosEnStock(+prompt("Dime el ID del producto: "));
                 break;
             case 9:
-                console.log("Elegiste la Opción 9");
+                console.log("Elegiste la Opción 9: Copiar producto");
                 copiarProducto(+prompt("Dime el ID del producto: "));
                 break;
             case 10:
