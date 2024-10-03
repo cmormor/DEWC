@@ -34,21 +34,37 @@ const nuevoProducto = () => {
 
 const mostrarProveedores = () => {
 
+    let hayProveedores = false;
+
     for (const cif in tienda.proveedores) {
         const proveedor = tienda.proveedores[cif];
         console.log(`Proveedor CIF: ${cif}, Nombre: ${proveedor.nombre}, Dirección: ${proveedor.direccion}, Teléfono: ${proveedor.telefono}`);
+        hayProveedores = true;
+    }
+
+    if (!hayProveedores) {
+        console.log("No hay proveedores disponibles");
     }
 };
 
 const mostrarProductos = () => {
 
+    let hayProductos = false;
+
     for (const id in tienda.productos) {
         const producto = tienda.productos[id];
         console.log(`Producto ID: ${id}, Nombre: ${producto.nombre}, Precio: ${producto.precio}, Cantidad: ${producto.cantidad}, Proveedor: ${producto.proveedor} `);
+        hayProductos = true;
+    }
+
+    if (!hayProductos) {
+        console.log("No hay productos disponibles");
     }
 };
 
 const editarProveedor = cif => {
+
+    let hayProveedores = false;
 
     for (const proveedor in tienda.proveedores) {
 
@@ -86,13 +102,22 @@ const editarProveedor = cif => {
             alert("Ese CIF no existe");
             return;
         }
+        
+        hayProveedores = true;
     }
+
+    if (!hayProveedores) {
+        console.log("No hay proveedores disponibles");
+    }
+
 };
 
 const editarProducto = id => {
 
+    let hayProductos = false;
+
     for (const producto in tienda.productos) {
-        
+
         if (id == producto) {
 
             if (confirm("¿Quieres editar el nombre del producto? Aceptar = sí / Cancelar = no")) {
@@ -112,13 +137,22 @@ const editarProducto = id => {
             alert("Ese ID no existe");
             return;
         }
+        
+        hayProductos = true;
+    }
+
+    if (!hayProductos) {
+        console.log("No hay productos disponibles");
     }
 
 };
 
 const eliminarProducto = id => {
 
+    let hayProductos = false;
+
     for (const producto in tienda.productos) {
+        
         if (id == producto) {
             delete tienda.productos[id];
             console.log(`Producto con ID: ${id} ha sido eliminado`)
@@ -126,11 +160,19 @@ const eliminarProducto = id => {
             alert("Ese ID no existe");
             return;
         }
+        
+        hayProductos = true;
+    }
+
+    if (!hayProductos) {
+        console.log("No hay productos disponibles");
     }
 
 };
 
 const valorTotalProductosEnStock = id => {
+
+    let hayProductos = false;
 
     for (const producto in tienda.productos) {
         if (id == producto) {
@@ -144,11 +186,19 @@ const valorTotalProductosEnStock = id => {
             alert("Ese ID no existe");
             return;
         }
+        
+        hayProductos = true;
+    }
+
+    if (!hayProductos) {
+        console.log("No hay productos disponibles");
     }
 
 };
 
 const copiarProducto = id => {
+
+    let hayProductos = false;
 
     for (const producto in tienda.productos) {
 
@@ -179,6 +229,11 @@ const copiarProducto = id => {
             alert("Ese ID no existe");
             return;
         }
+        hayProductos = true;
+    }
+
+    if (!hayProductos) {
+        console.log("No hay productos disponibles");
     }
 };
 
