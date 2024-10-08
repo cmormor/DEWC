@@ -8,6 +8,11 @@ const estudiantes = [
     { nombre: "Pedro", examen1: 5, examen2: 6, trabajoFinal: 6 }
 ];
 
+const convertirANumero = (valor) => {
+    const numero = parseFloat(valor);
+    return isNaN(numero) ? 0 : numero;
+};
+
 function ListaEstudiantesCompleta({ lista }) {
     let completa;
     return (
@@ -21,7 +26,7 @@ function ListaEstudiantesCompleta({ lista }) {
                 <th>ESTADO</th>
             </tr>
             {lista.map((elem, index) => {
-                const promedio = ((elem.examen1 + elem.examen2 + elem.trabajoFinal) / 3).toFixed(2);
+                const promedio = ((convertirANumero(elem.examen1) + convertirANumero(elem.examen2) + convertirANumero(elem.trabajoFinal)) / 3).toFixed(2);
                 const estado = promedio >= 5 ? "Aprobado" : "Suspenso";
                 return (
                     <tr key={index}>
@@ -36,19 +41,19 @@ function ListaEstudiantesCompleta({ lista }) {
             })}
         </table>
     );
-}
+};
 
 function ListaEstudiantesAprobados({ lista }) {
     let aprob;
-    const aprobados = lista.filter((elem) => ((elem.examen1 + elem.examen2 + elem.trabajoFinal) / 3) >= 5);
+    const aprobados = lista.filter((elem) => ((convertirANumero(elem.examen1) + convertirANumero(elem.examen2) + convertirANumero(elem.trabajoFinal)) / 3) >= 5);
     return <ListaEstudiantesCompleta lista={aprobados} />;
-}
+};
 
 function ListaEstudiantesSuspensos({ lista }) {
     let susp;
-    const suspensos = lista.filter((elem) => ((elem.examen1 + elem.examen2 + elem.trabajoFinal) / 3) < 5);
+    const suspensos = lista.filter((elem) => ((convertirANumero(elem.examen1) + convertirANumero(elem.examen2) + convertirANumero(elem.trabajoFinal)) / 3) < 5);
     return <ListaEstudiantesCompleta lista={suspensos} />;
-}
+};
 
 let selectedOption = null;
 
