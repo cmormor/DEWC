@@ -9,7 +9,7 @@ const estudiantes = [
 ];
 
 const convertirANumero = (valor) => {
-  const numero = parseFloat(valor);
+  const numero = +(valor);
   if (numero === NaN) {
     return 0;
   } else {
