@@ -56,27 +56,27 @@ function ListaEstudiantesSuspensos({ lista }) {
   return <ListaEstudiantesCompleta lista={suspensos} />;
 };
 
-let selectedOption = null;
+let opcion = null;
 
 const question = () => {
-  if (selectedOption === null) {
+  if (opcion === null) {
     if (confirm("¿Quieres mostrar la lista de todos los alumnos? Aceptar = sí / Cancelar = no")) {
-      selectedOption = 1;
+      opcion = 1;
     } else if (confirm("¿Quieres mostrar la lista de todos los alumnos aprobados? Aceptar = sí / Cancelar = no")) {
-      selectedOption = 2;
+      opcion = 2;
     } else if (confirm("¿Quieres mostrar la lista de todos los alumnos suspensos? Aceptar = sí / Cancelar = no")) {
-      selectedOption = 3;
+      opcion = 3;
     } else {
       alert("Ninguna opción valida, reinicia el programa.");
-      selectedOption = 0;
+      opcion = 0;
     }
   }
 
-  if (selectedOption === 1) {
+  if (opcion === 1) {
     return <ListaEstudiantesCompleta lista={estudiantes} />;
-  } else if (selectedOption === 2) {
+  } else if (opcion === 2) {
     return <ListaEstudiantesAprobados lista={estudiantes} />;
-  } else if (selectedOption === 3) {
+  } else if (opcion === 3) {
     return <ListaEstudiantesSuspensos lista={estudiantes} />;
   } else {
     return <h1>No se seleccionó ninguna opción válida.</h1>;
