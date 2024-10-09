@@ -10,7 +10,11 @@ const estudiantes = [
 
 const convertirANumero = (valor) => {
     const numero = parseFloat(valor);
-    return isNaN(numero) ? 0 : numero;
+    if(numero === NaN) {
+      return 0;
+    } else {
+      return numero;
+    }
 };
 
 function ListaEstudiantesCompleta({ lista }) {
