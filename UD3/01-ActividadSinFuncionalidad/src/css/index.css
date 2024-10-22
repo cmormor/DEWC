@@ -1,0 +1,102 @@
+#root {
+  height: 100vh;
+  font-family: sans-serif ;
+}
+
+.cuadroPrincipal {
+  background-color: #084f83;
+  width: 35%;
+  height: 80%;
+  margin: 0 auto;
+  margin-top: 7%;
+  position: relative;
+}
+
+.cuadroSecundario {
+  background-color: #003b67;
+  width: 90%;
+  height: 90%;
+  text-align: center;
+  color: white;
+  position: absolute;
+  margin-top: 4%;
+  margin-left: 5%;
+
+  h1 {
+    padding: 3%;
+  }
+
+}
+
+.tituloRango {
+  width: 20%;
+  display: inline-block;
+  text-align: left;
+  margin-right: 30%;
+}
+
+.creditoFijo {
+  width: 15%;
+  display: inline-block;
+  border: 2px solid white;
+  padding: 2%;
+  font-size: large;
+
+}
+
+.slider p {
+  width: 50%;
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 5%;
+}
+
+.resultado {
+  background-color: #00355d;
+  width: 90%;
+  height: 8%;
+  text-align: center;
+  color: white;
+  position: absolute;
+  margin-top: 4%;
+  margin-left: 5%;
+}
+
+.tituloResultado{
+  width: 50%;
+  display: inline-block;
+}
+
+.calculoResultado {
+  width: 50%;
+  display: inline-block;
+  font-size: xx-large;
+  margin: 0;
+  margin-top: 1%;
+}
+
+.primero {
+  display: inline-block;
+  background-color: #17aa8d;
+  border: none;
+  font-size: large;
+  color: white;
+  padding: 3%;
+  margin-top: 17%;
+  width: 55%;
+  
+}
+
+.segundo {
+  display: inline-block;
+  background-color: #09548c;
+  border: none;
+  color: white;
+  width: 30%;
+  padding: 2%;
+  padding-bottom: 2.5%;
+  margin-left: 5%;
+  vertical-align: top;
+  margin-top: 17%;
+
+}
