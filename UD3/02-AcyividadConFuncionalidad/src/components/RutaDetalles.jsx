@@ -51,7 +51,7 @@ export const RutaDetalles = () => {
           </div>
 
           <div className="resultado">
-            <Resultado titulo={"CUOTA FIJA POR MES"} valueSlider={3250} />
+            <Resultado titulo={"CUOTA FIJA POR MES"} valueSlider={3250.00} />
           </div>
 
           <div className="boton">
