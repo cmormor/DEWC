@@ -1,22 +1,33 @@
 import Slider from '@mui/joy/Slider';
 
-export const Rango = ({ titulo, creditoFijo, inicioRango, finalRango }) => {
+
+export const Rango = ({ titulo, inicioRango, finalRango, valueSlider, cambiarSlider }) => {
+
+  const onChangeSlider = (e) => {
+    // console.log(e.target.value);
+    
+    cambiarSlider(e.target.value);
+  }
+  
   return (
     <>
 
       <div className='rango'>
-        <h2>{titulo}</h2>
-        <p>{creditoFijo}</p>
-        <div className=''>
-          <p>{inicioRango}</p>
+        <p className='tituloRango'>{titulo}</p>
+        <p className='creditoFijo'><strong>{valueSlider}</strong></p>
+      </div>
+
+      <div className='slider'>
           <Slider
             min={inicioRango}
             max={finalRango}
-            sx={{ width: '300px', margin: '0 auto' }}
+            // value={6000}
+            sx={{ width: '65%'}}
+            onChange={onChangeSlider}
           />
+          <p>{inicioRango}</p>
           <p>{finalRango}</p>
         </div>
-      </div>
 
     </>
   )
